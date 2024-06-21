@@ -1,0 +1,40 @@
+        //FIXME: timer 99 not getting added = nullpointer exception
+        else if(e.getArrivalTime() < eventList[0].getArrivalTime()) // if the new Event is < than the first Event in the array
+        {
+            System.out.println(e.getArrivalTime() + " < " + eventList[0].getArrivalTime());
+
+            for(int i = 0; i < eventList.length; i++)
+            {
+                eventList[i+1] = eventList[i];
+            }
+            eventList[0] = e;
+            size++;
+            System.out.println(e.getArrivalTime() + " added.");
+        }
+        else 
+        {
+            for(int i = 0; i < eventList.length; i++)
+            {
+                if(eventList[i].getArrivalTime() < e.getArrivalTime())
+                {
+                    if(eventList[i+1].getArrivalTime() > e.getArrivalTime())
+                    {
+                        System.out.println("entering");
+                        tempEvent = eventList[i+1];
+                        eventList[i+1] = e; // adding e
+                        eventList[i+2] = tempEvent;
+                        size++;
+                        System.out.println(e.getArrivalTime() + " added at " + (i+1));
+                        break;
+                    }
+                    else if(eventList[i+1] == null)
+                    {
+                        System.out.println("entering");
+                        eventList[i+1] = e;
+                        size++;
+                        System.out.println(e.getArrivalTime() + " added at " + (i+1));
+                        break;
+                    }
+                }
+            }   
+        }
